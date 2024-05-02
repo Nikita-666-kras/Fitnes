@@ -1,10 +1,12 @@
 <script setup>
-
+import carousel from "./components/carusel.vue";
 </script>
 
 <template>
-  <header>
+  <header class="w-100">
     
+   <carousel />
+
   </header>
 
   <main>
