@@ -1,5 +1,5 @@
 <script setup>
-
+import Header from './Header.vue';
 </script>
 
 <template>
@@ -9,14 +9,28 @@
             
     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
         <div class="carousel-inner">
+          <Header />
             <div class="carousel-item active">
-            <img src="https://i.pinimg.com/564x/aa/a6/e2/aaa6e24cbd7a47b4c539b5f426f93161.jpg" class="d-block w-100" alt="..." >
+            <img src="https://avatars.mds.yandex.net/get-altay/1063709/2a0000016605987226d6e273f1fe700f6a98/XXL " class="d-block w-100" alt="..." >
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Вставить текст</h3>
+              <!-- вставить кнопку -->
+            </div>
+            </div>
+            
+            <div class="carousel-item">
+            <img src="https://src.kleos.ru/file/org_image/2021/11/9/file_i75b4.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Вставить текст</h5>
+              <!-- вставить кнопку -->
+            </div>
             </div>
             <div class="carousel-item">
-            <img src="https://i.pinimg.com/564x/1a/30/a1/1a30a1e45c94f155305b9449f9040d2e.jpg" class="d-block w-100" alt="...">
+            <img src="https://src.kleos.ru/file/org_image/2021/7/28/file_ttdyk.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Вставить текст</h5>
+              <!-- вставить кнопку -->
             </div>
-            <div class="carousel-item">
-            <img src="https://i.pinimg.com/564x/a8/88/24/a88824896135bd6e104279ce63503b74.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">

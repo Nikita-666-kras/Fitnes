@@ -1,9 +1,10 @@
 <script setup>
 import carousel from "./components/carusel.vue";
+
 </script>
 
 <template>
-  <header class="w-100">
+  <header class="main">
     
    <carousel />
 
