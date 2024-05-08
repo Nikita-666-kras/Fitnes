@@ -8,7 +8,7 @@ import Header from './Header.vue';
 
             
     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
-        <div class="carousel-inner">
+        <div class="carhead carousel-inner">
           <Header />
             <div class="carousel-item active">
             <img src="https://avatars.mds.yandex.net/get-altay/1063709/2a0000016605987226d6e273f1fe700f6a98/XXL " class="d-block w-100" alt="..." >
