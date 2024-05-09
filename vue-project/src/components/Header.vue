@@ -1,5 +1,17 @@
-<script setup>
+<script >
+export default{
+  data(){
+    return{
+      
+    }
+  },
+  methods:{
+    mainMenu(){
+      return "ok";
+    }
+  }
 
+}
 </script>
 
 <template>
@@ -34,7 +46,7 @@
         <button type="submit">Найти</button>
     </div>
     <div class="buttons">
-        <button>Главная</button>
+        <button @click="mainMenu()">Главная</button>
         <button>Тренеровки</button>
         <button>Мой профиль</button>
     </div>
