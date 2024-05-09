@@ -7,12 +7,12 @@ import Header from "./components/Header.vue";
 <template>
   <header class="main">
     
-   <Header />
+   
 
   </header>
 
   <main>
-    
+    <carousel />
   </main>
 </template>
 
