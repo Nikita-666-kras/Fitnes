@@ -78,7 +78,7 @@ header {
   background: rgb(255, 255, 255);
   background: linear-gradient(
     241deg,
-    rgba(0, 254, 255, 1) 0%,
+    rgb(0, 254, 255) 0%,
     rgba(252, 0, 255, 1) 100%
   );
   animation: gradient 5s infinite linear;
