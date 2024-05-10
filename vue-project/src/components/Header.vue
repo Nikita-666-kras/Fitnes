@@ -5,7 +5,7 @@ export default {
   },
   methods: {
     mainMenu() {
-      return 'ok';
+      window.location.href = '/home'
     },
   },
 };
@@ -37,8 +37,9 @@ export default {
     <div class="logo">
       <img
         src="https://cdn-icons-png.flaticon.com/512/2750/2750276.png"
-        class="logo"
+        class="logo" 
         alt=""
+        @click="mainMenu()"
       />
     </div>
     <div class="search-bar">

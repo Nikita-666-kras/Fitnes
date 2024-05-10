@@ -13,7 +13,7 @@ import Header from './Header.vue';
       <div class="carhead carousel-inner">
         <div class="carousel-item active">
           <img
-            src="https://img.freepik.com/free-photo/modern-gym-composition-with-sport-elements_23-2147913703.jpg?t=st=1715338563~exp=1715342163~hmac=f694cefd8d338e85bffaa6f4203a20e90eefdd828889011f3d19b1fd2feae5ca&w=1380 "
+            src="https://img.freepik.com/free-photo/modern-gym-composition-with-sport-elements_23-2147913703.jpg?t=st=1715349376~exp=1715352976~hmac=bc2346d0003ced8c605b434a5f321366618a9e82f594a9679688382bb2541407&w=1380"
             class="d-block w-100"
             alt="..."
           />
@@ -25,7 +25,7 @@ import Header from './Header.vue';
 
         <div class="carousel-item">
           <img
-            src="https://img.freepik.com/free-photo/stretching-beautiful-young-female-athlete-practicing-monochrome-purple-portrait-sportive-caucasian-fit-model-training-body-building-healthy-lifestyle-beauty-action-concept_155003-39077.jpg?t=st=1715338687~exp=1715342287~hmac=400fee291a56cb1a3e97ff53033004905b56e8f3888e675daa8cee5eb60dc4c6&w=1380"
+            src="https://img.freepik.com/free-photo/stretching-beautiful-young-female-athlete-practicing-monochrome-purple-portrait-sportive-caucasian-fit-model-training-body-building-healthy-lifestyle-beauty-action-concept_155003-39077.jpg?t=st=1715349200~exp=1715352800~hmac=5253a9ff81208459a36d92a10a67a07511bceb780281bbd4f40e112a9549f5e6&w=1380"
             class="d-block w-100"
             alt="..."
           />
@@ -36,7 +36,7 @@ import Header from './Header.vue';
         </div>
         <div class="carousel-item">
           <img
-            src="https://img.freepik.com/free-photo/strong-beautiful-young-female-athlete-practicing-monochrome-purple-portrait-sportive-caucasian-fit-model-with-elastics-body-building-healthy-lifestyle-beauty-action-concept_155003-36755.jpg?t=st=1715338647~exp=1715342247~hmac=8586b23737769b198702f06072c76ac560d149eeff7f4075f7fc52aca4cc6705&w=1380"
+            src="https://img.freepik.com/free-photo/strong-beautiful-young-female-athlete-practicing-monochrome-purple-portrait-sportive-caucasian-fit-model-with-elastics-body-building-healthy-lifestyle-beauty-action-concept_155003-36755.jpg?t=st=1715349000~exp=1715352600~hmac=1d7417cc7703b7454cb99dd4f8102bfa5a3737a0a8abb59a42958e10c47c66c1&w=1380"
             class="d-block w-100"
             alt="..."
           />
