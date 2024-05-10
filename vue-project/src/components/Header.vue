@@ -78,10 +78,10 @@ header {
   background: rgb(255, 255, 255);
   background: linear-gradient(
     241deg,
-    rgb(0, 254, 255) 0%,
-    rgba(252, 0, 255, 1) 100%
+    rgb(94, 84, 142) 0%,
+    rgba(190, 149, 196) 100%
   );
-  animation: gradient 5s infinite linear;
+  animation: gradient 9s infinite linear;
   background-size: 400%;
   color: white;
 }
@@ -116,7 +116,7 @@ header {
 .buttons button {
   padding: 5px 10px;
   margin-left: 10px;
-  background-color: #431448;
+  background-color: #231942;
   color: white;
   border: none;
   border-radius: 3px;

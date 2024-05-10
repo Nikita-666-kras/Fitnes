@@ -11,7 +11,7 @@
           <div class="card-body">
             <h5 class="card-title">Тренер</h5>
             <p class="card-text">Описание Тренера 1.</p>
-            <a href="#" class="btn btn-primary">Купить</a>
+            <a href="#" class="btn ">Купить</a>
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@
           <div class="card-body">
             <h5 class="card-title">Тренер 2</h5>
             <p class="card-text">Описание Тренера 2.</p>
-            <a href="#" class="btn btn-primary">Купить</a>
+            <a href="#" class="btn ">Купить</a>
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@
           <div class="card-body">
             <h5 class="card-title">Тренер 3</h5>
             <p class="card-text">Описание Тренера 3.</p>
-            <a href="#" class="btn btn-primary">Купить</a>
+            <a href="#" class="btn ">Купить</a>
           </div>
         </div>
       </div>
@@ -59,10 +59,14 @@
   background: rgb(255, 255, 255);
   background: linear-gradient(
     241deg,
-    rgb(241, 169, 255) 0%,
-    rgba(252, 0, 255, 1) 100%
+    rgb(159, 134, 192) 0%,
+    rgba(159, 134, 192) 100%
   );
   animation: gradient 5s infinite linear;
   background-size: 400%;
+}
+.btn{
+    color: aliceblue;
+    background-color: rgb(35, 25, 66);
 }
 </style>
