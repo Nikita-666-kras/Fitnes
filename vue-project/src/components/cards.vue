@@ -2,7 +2,7 @@
   <div class="First container">
     <div class="row">
       <div class="col-md-4">
-        <div class="card">
+        <div class="c1 card">
           <img
             src="https://via.placeholder.com/150"
             class="card-img-top"
@@ -17,7 +17,7 @@
       </div>
 
       <div class="col-md-4">
-        <div class="card">
+        <div class="c1 card">
           <img
             src="https://via.placeholder.com/150"
             class="card-img-top"
@@ -32,7 +32,7 @@
       </div>
 
       <div class="col-md-4">
-        <div class="card">
+        <div class="c1 card">
           <img
             src="https://via.placeholder.com/150"
             class="card-img-top"
@@ -54,5 +54,15 @@
 <style scoped>
 .First {
   margin-top: 7%;
+}
+.c1 {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    241deg,
+    rgb(241, 169, 255) 0%,
+    rgba(252, 0, 255, 1) 100%
+  );
+  animation: gradient 5s infinite linear;
+  background-size: 400%;
 }
 </style>

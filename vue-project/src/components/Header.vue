@@ -75,7 +75,14 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #1c0a19;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    241deg,
+    rgba(0, 254, 255, 1) 0%,
+    rgba(252, 0, 255, 1) 100%
+  );
+  animation: gradient 5s infinite linear;
+  background-size: 400%;
   color: white;
 }
 
@@ -109,11 +116,22 @@ header {
 .buttons button {
   padding: 5px 10px;
   margin-left: 10px;
-  background-color: #570061;
+  background-color: #431448;
   color: white;
   border: none;
   border-radius: 3px;
   cursor: pointer;
+}
+@keyframes gradient {
+  0% {
+    background-position: 80% 0%;
+  }
+  50% {
+    background-position: 20% 100%;
+  }
+  100% {
+    background-position: 80% 0%;
+  }
 }
 
 @media (max-width: 768px) {
