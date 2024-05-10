@@ -113,16 +113,11 @@ header {
   flex: 1;
 }
 
-@font-face {
-	font-family: 'MADE'; 
-	
-  src: local('MADE'),
-		url(../assets/MADE.otf);
-}
+
  
 
 .buttons button {
-  font-family: MADE;
+  
   
   padding: 5px 10px;
   margin-left: 10px;
