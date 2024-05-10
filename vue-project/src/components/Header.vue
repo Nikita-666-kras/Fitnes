@@ -113,7 +113,17 @@ header {
   flex: 1;
 }
 
+@font-face {
+	font-family: 'MADE'; 
+	
+  src: local('MADE'),
+		url(../assets/MADE.otf);
+}
+ 
+
 .buttons button {
+  font-family: MADE;
+  
   padding: 5px 10px;
   margin-left: 10px;
   background-color: #231942;
@@ -145,13 +155,19 @@ header {
     flex-direction: column;
     padding: 10px;
   }
-
+  .search-bar{
+    width: 100%;
+    align-items: center;
+    display: contents;
+  }
   .search-bar input {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
+  
 
   .buttons {
+    align-items: end; 
     margin-top: 10px;
   }
 

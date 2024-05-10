@@ -11,7 +11,7 @@
           <div class="card-body">
             <h5 class="card-title">Тренер</h5>
             <p class="card-text">Описание Тренера 1.</p>
-            <a href="#" class="btn ">Купить</a>
+            <a href="#" class="btn ">Профиль</a>
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@
           <div class="card-body">
             <h5 class="card-title">Тренер 2</h5>
             <p class="card-text">Описание Тренера 2.</p>
-            <a href="#" class="btn ">Купить</a>
+            <a href="#" class="btn ">Профиль</a>
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@
           <div class="card-body">
             <h5 class="card-title">Тренер 3</h5>
             <p class="card-text">Описание Тренера 3.</p>
-            <a href="#" class="btn ">Купить</a>
+            <a href="#" class="btn ">Профиль</a>
           </div>
         </div>
       </div>
@@ -68,5 +68,33 @@
 .btn{
     color: aliceblue;
     background-color: rgb(35, 25, 66);
+}
+@media (max-width: 768px) {
+  .search-bar input {
+    width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .First {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .c1 {
+    width: 100%;
+    margin-bottom: 7%;
+  }
+
+  .buttons {
+    margin-top: 10px;
+  }
+
+  .buttons button {
+    margin-left: 0;
+    display: block;
+    width: 100%;
+    margin-top: 7px;
+  }
 }
 </style>
