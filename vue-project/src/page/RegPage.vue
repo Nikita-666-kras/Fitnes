@@ -19,7 +19,7 @@ export default{
     
     async signupUser() {
       const newUser = {
-        userName: this.userName,
+        name: this.userName,
         email: this.userEmail,
         password: this.userPassword
       }

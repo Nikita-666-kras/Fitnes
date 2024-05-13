@@ -14,7 +14,7 @@ export default {
   methods: {
     async signupUser() {
       const User = {
-        userName: this.userName,
+        name: this.userName,
         password: this.userPassword,
       };
       try {
