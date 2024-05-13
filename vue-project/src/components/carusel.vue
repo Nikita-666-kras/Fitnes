@@ -70,4 +70,8 @@ import Header from './Header.vue';
   <main></main>
 </template>
 
-<style scoped></style>
+<style scoped>
+.carousel-item{
+  align-items: center;
+}
+</style>

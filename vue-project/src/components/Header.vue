@@ -5,7 +5,7 @@ export default {
   },
   methods: {
     mainMenu() {
-      window.location.href = '/home'
+      window.location.href = '/main'
     },
   },
 };
