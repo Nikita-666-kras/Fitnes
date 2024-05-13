@@ -4,7 +4,7 @@ import Header from './Header.vue';
 
 <template>
   <header>
-    <Header />
+    
     <div
       id="carouselExampleControlsNoTouching"
       class="First carousel slide"
