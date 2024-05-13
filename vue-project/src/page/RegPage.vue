@@ -9,7 +9,7 @@ export default{
     return{
       users: [],
       userName: '',
-      userAge: 0,
+      userEmail: '',
       userPassword: '',
       errorMessage: ''
       
@@ -20,7 +20,7 @@ export default{
     async signupUser() {
       const newUser = {
         userName: this.userName,
-        age: this.userAge,
+        email: this.userEmail,
         password: this.userPassword
       }
       try {
@@ -29,7 +29,7 @@ export default{
         window.location.href ="/log";
       } 
       catch (error){
-        if (!response.status === 401) {
+        if (response.status === 401) {
           this.errorMessage ="Ошибка на стороне сервера!!!"
         }
         else{
@@ -79,7 +79,7 @@ export default{
     <div class="reg_window">
         <div class="reg_input">
             <input type="text" v-model="userName" placeholder="name">
-            <input type="number" v-model="userAge" placeholder="age">
+            <input type="email" v-model="userEmail" placeholder="email">
             <input type="password" v-model="userPassword" placeholder="password">
             
         </div>
