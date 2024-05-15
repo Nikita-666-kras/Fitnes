@@ -213,6 +213,7 @@ public class DataAccessLayer {
         return resultList;
     }
 
+
     public String newUserToDatabase(User user) {
         session = sessionFactory.openSession();
         session.beginTransaction();
@@ -230,6 +231,19 @@ public class DataAccessLayer {
         session.getTransaction().commit();
         session.close();
         return "Pabeda)";
+    }
+    public String newImgToDatbase(String Name){
+        session = sessionFactory.openSession();
+        session.getTransaction().begin();
+        Query query = session
+                .createQuery("FROM User where Name = :name")
+                .setParameter("name", Name);
+        User userFrom = (User) query.uniqueResult();
+        if (userFrom == null) {
+            return null;
+        }
+        return userFrom;
+
     }
 
     public User getUserFromDatabaseByUsername(String name) {

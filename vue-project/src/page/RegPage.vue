@@ -1,8 +1,13 @@
 <script >
 
 import api from "../api.js";
+import { useVuelidate } from '@vuelidate/core';
+import { required, email } from '@vuelidate/validators';
 
 export default{
+  setup () {
+    return { v$: useVuelidate() }
+  },
   
   data(){
     
@@ -15,6 +20,14 @@ export default{
       
     }
   },
+  validations () {
+    return {
+      userName: { required }, // Matches this.firstName
+      userPassword: { required }, // Matches this.lastName
+      userEmail: { required, email } // Matches this.contact.email
+      
+    } 
+  },
   methods:{
     
     async signupUser() {
@@ -23,19 +36,22 @@ export default{
         email: this.userEmail,
         password: this.userPassword
       }
-      try {
-        const response = await api.post('/auth/signup', newUser);
-        console.log('Успешно зарегистрирован:',newUser);
-        window.location.href ="/log";
-      } 
-      catch (error){
-        if (response.status === 401) {
-          this.errorMessage ="Ошибка на стороне сервера!!!"
+      const isFormCorrect = await this.v$.$validate()
+      if (isFormCorrect){
+        try {
+          const response = await api.post('/auth/signup', newUser);
+          console.log('Успешно зарегистрирован:',newUser);
+          window.location.href ="/log";
+        } 
+        catch (error){
+          if (response.status === 401) {
+            this.errorMessage ="Ошибка на стороне сервера!!!"
+          }
+          else{
+            this.errorMessage ="Ошибка авторизации! Проверьте логин и пароль"
+          }
+          console.log(this.userName);
         }
-        else{
-          this.errorMessage ="Ошибка авторизации! Проверьте логин и пароль"
-        }
-        console.log(this.userName);
       }
     },
     
@@ -78,9 +94,10 @@ export default{
   <main>
     <div class="reg_window">
         <div class="reg_input">
-            <input type="text" v-model="userName" placeholder="name">
-            <input type="email" v-model="userEmail" placeholder="email">
-            <input type="password" v-model="userPassword" placeholder="password">
+            <input type="text" v-model.trim="userName" placeholder="name">
+            <div v-if="v$.userName.$error">Name field has an error.</div>
+            <input type="email" v-model.trim="userEmail" placeholder="email">
+            <input type="password" v-model.trim="userPassword" placeholder="password">
             
         </div>
         <div class="reg_Button">

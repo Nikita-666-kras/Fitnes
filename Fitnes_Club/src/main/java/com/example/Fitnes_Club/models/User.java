@@ -18,5 +18,7 @@ public class User {
     private String role;
     @Column(name = "password")
     private String password;
+    @Column(name = "img")
+    private String img;
 
 }

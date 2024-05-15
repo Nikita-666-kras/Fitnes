@@ -86,4 +86,9 @@ public class AdminController {
     public ResponseEntity getUserById(@PathVariable("id") long id) {
         return ResponseEntity.ok(dataAccessLayer.getUser(id));
     }
+    @PostMapping("create/user/")
+    public ResponseEntity<String> createUser(@RequestBody User user) {
+        dataAccessLayer.createUser(user);
+        return ResponseEntity.ok("PABEDA!");
+    }
 }

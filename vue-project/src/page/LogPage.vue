@@ -1,7 +1,12 @@
 <script>
 import api from '../api.js';
+import { useVuelidate } from '@vuelidate/core';
+import { required, email } from '@vuelidate/validators';
 
 export default {
+  setup () {
+    return { v$: useVuelidate() }
+  },
   data() {
     return {
       users: [],
@@ -11,26 +16,37 @@ export default {
       userPassword: '',
     };
   },
+  validations () {
+    return {
+      userName: { required }, // Matches this.firstName
+      userPassword: { required }, // Matches this.lastName
+      
+      
+    } 
+  },
   methods: {
     async signupUser() {
       const User = {
         name: this.userName,
         password: this.userPassword,
       };
-      try {
-        const response = await api
-          .post('/auth/signin', User)
-          .then((response) => {
-            this.responseData = response.data;
-            this.errorMessage = response.data.message;
-            window.location.href = '/auth/main';
-          })
-          .catch((error) => {
-            console.error(error);
-            this.errorMessage = error.response.status;
-          });
-        console.log(' не авторизован:', User);
-      } catch (error) {}
+      const isFormCorrect = await this.v$.$validate()
+      if (isFormCorrect){
+        try {
+          const response = await api
+            .post('/auth/signin', User)
+            .then((response) => {
+              this.responseData = response.data;
+              this.errorMessage = response.data.message;
+              window.location.href = '/auth/main';
+            })
+            .catch((error) => {
+              console.error(error);
+              this.errorMessage = error.response.status;
+            });
+          console.log(' не авторизован:', User);
+        } catch (error) {}
+      }
     },
   },
   // created() {
@@ -67,11 +83,11 @@ export default {
       <div class="reg_window">
         <div class="reg_input">
           <h2 class="error">{{ errorMessage }}</h2>
-          <input type="text" v-model="userName" placeholder="name" />
+          <input type="text" v-model.trim="userName" placeholder="name" />
 
           <input
             type="password"
-            v-model="userPassword"
+            v-model.trim="userPassword"
             placeholder="password"
           />
         </div>

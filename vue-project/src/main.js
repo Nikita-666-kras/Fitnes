@@ -6,6 +6,7 @@ import router from './router';
 import Cookies from 'js-cookie';
 
 
+
 const app = createApp(App);
 app.use(router);
 app.mount('#app');
