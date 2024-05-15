@@ -8,6 +8,28 @@ export default {
       img: '',
     };
   },
+  methods: {
+    async signupUser() {
+      const User = {
+        name: this.userName,
+        password: this.userPassword,
+      };
+      try {
+        const response = await api
+          .post('/auth/signin', User)
+          .then((response) => {
+            this.responseData = response.data;
+            this.errorMessage = response.data.message;
+            window.location.href = '/auth/main';
+          })
+          .catch((error) => {
+            console.error(error);
+            this.errorMessage = error.response.status;
+          });
+        console.log(' не авторизован:', User);
+      } catch (error) {}
+    },
+  },
 };
 </script>
 <template>
