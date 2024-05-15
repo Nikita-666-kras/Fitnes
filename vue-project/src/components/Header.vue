@@ -5,7 +5,10 @@ export default {
   },
   methods: {
     mainMenu() {
-      window.location.href = '/main'
+      window.location.href = '/auth/main';
+    },
+    account() {
+      window.location.href = '/auth/account';
     },
   },
 };
@@ -37,7 +40,7 @@ export default {
     <div class="logo">
       <img
         src="https://cdn-icons-png.flaticon.com/512/2750/2750276.png"
-        class="logo" 
+        class="logo"
         alt=""
         @click="mainMenu()"
       />
@@ -49,7 +52,7 @@ export default {
     <div class="buttons">
       <button @click="mainMenu()">Главная</button>
       <button>Тренеровки</button>
-      <button>Мой профиль</button>
+      <button @click="account()">Мой профиль</button>
     </div>
   </header>
 
@@ -114,12 +117,7 @@ header {
   flex: 1;
 }
 
-
- 
-
 .buttons button {
-  
-  
   padding: 5px 10px;
   margin-left: 10px;
   background-color: #231942;
@@ -151,7 +149,7 @@ header {
     flex-direction: column;
     padding: 10px;
   }
-  .search-bar{
+  .search-bar {
     width: 100%;
     align-items: center;
     display: contents;
@@ -160,10 +158,9 @@ header {
     width: 100%;
     margin-bottom: 5px;
   }
-  
 
   .buttons {
-    align-items: end; 
+    align-items: end;
     margin-top: 10px;
   }
 
