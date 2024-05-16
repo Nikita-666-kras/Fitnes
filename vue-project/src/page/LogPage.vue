@@ -2,6 +2,7 @@
 import api from '../api.js';
 import { useVuelidate } from '@vuelidate/core';
 import { required, email } from '@vuelidate/validators';
+import Cookies from 'js-cookie';
 
 export default {
   setup () {
@@ -14,6 +15,7 @@ export default {
       errorMessage: '',
       responseData: null,
       userPassword: '',
+      jwt: null,
     };
   },
   validations () {
@@ -38,7 +40,9 @@ export default {
             .then((response) => {
               this.responseData = response.data;
               this.errorMessage = response.data.message;
-              window.location.href = '/auth/main';
+              this.jwt = response.data;
+              console.log(this.jwt);
+              // window.location.href = '/auth/main';
             })
             .catch((error) => {
               console.error(error);

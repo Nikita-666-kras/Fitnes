@@ -15,6 +15,7 @@ import java.util.List;
 public class UserDetailsImpl implements UserDetails {
     private Long id;
     private String userName;
+    private String img;
     private String Email;
     private String password;
     public static UserDetailsImpl build(User user){
@@ -22,6 +23,7 @@ public class UserDetailsImpl implements UserDetails {
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
+                user.getImg(),
                 user.getPassword());
     }
     @Override
@@ -38,6 +40,7 @@ public class UserDetailsImpl implements UserDetails {
     public String getUsername() {
         return userName;
     }
+
 
     @Override
     public boolean isAccountNonExpired() {

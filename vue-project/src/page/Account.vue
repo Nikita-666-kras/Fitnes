@@ -16,11 +16,11 @@ export default {
       };
       try {
         const response = await api
-          .post('/auth/signin', User)
+          .post('/set/user/img', User)
           .then((response) => {
             this.responseData = response.data;
             this.errorMessage = response.data.message;
-            window.location.href = '/auth/main';
+            // window.location.href = '/auth/main';
           })
           .catch((error) => {
             console.error(error);
