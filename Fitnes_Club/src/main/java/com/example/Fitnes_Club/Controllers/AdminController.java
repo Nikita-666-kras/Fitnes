@@ -87,8 +87,10 @@ public class AdminController {
         return ResponseEntity.ok(dataAccessLayer.getUser(id));
     }
     @PostMapping("set/user/img")
-    public ResponseEntity newImgToDatbase(@RequestBody String name, String img ) {
-        dataAccessLayer.newImgToDatbase(name,img);
+    public ResponseEntity newImgToDatbase(@RequestBody User user) {
+        log.info(user.getName());
+        dataAccessLayer.newImgToDatbase(user);
         return ResponseEntity.ok("Ура картинка!");
     }
+
 }

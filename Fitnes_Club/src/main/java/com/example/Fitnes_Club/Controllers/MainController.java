@@ -11,58 +11,65 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/unauthorized")
 public class MainController {
     private final DataAccessLayer dataAccessLayer;
+
     @Autowired
     public MainController(DataAccessLayer dataAccessLayer) {
         this.dataAccessLayer = dataAccessLayer;
     }
 
     @GetMapping("/hello")
-    public void hello(){
+    public void hello() {
         log.info("Gracias Senior Pumba");
     }
+
     @GetMapping("/user")
-    public void user(){
+    public void user() {
         log.info("Gracias Senior user");
     }
+
     @GetMapping("/admin")
-    public void admin(){
+    public void admin() {
         log.info("Gracias Senior admin");
     }
+
     @GetMapping("get/coach/{id}")
     public ResponseEntity getCoachById(@PathVariable("id") long id) {
         return ResponseEntity.ok(dataAccessLayer.getCoach(id));
     }
+
     @GetMapping("get/coach/")
-    public ResponseEntity getCoach(){
+    public ResponseEntity getCoach() {
         return ResponseEntity.ok(dataAccessLayer.getCoach());
     }
-
 
 
     @GetMapping("get/workouts/{id}")
     public ResponseEntity getWorkoutsById(@PathVariable("id") long id) {
         return ResponseEntity.ok(dataAccessLayer.getWorkouts(id));
     }
+
     @GetMapping("get/workouts/")
-    public ResponseEntity getWorkouts(){
+    public ResponseEntity getWorkouts() {
         return ResponseEntity.ok(dataAccessLayer.getWorkouts());
     }
-
 
 
     @GetMapping("get/clients/{id}")
     public ResponseEntity getClientsById(@PathVariable("id") long id) {
         return ResponseEntity.ok(dataAccessLayer.getClients(id));
     }
+
     @GetMapping("get/clients/")
-    public ResponseEntity getClients(){
+    public ResponseEntity getClients() {
         return ResponseEntity.ok(dataAccessLayer.getClients());
     }
 
     @GetMapping("get/users/")
-    public ResponseEntity getUsers(){
+    public ResponseEntity getUsers() {
         System.out.println("pop");
-        return ResponseEntity.ok(dataAccessLayer.getUsers())  ;
+        return ResponseEntity.ok(dataAccessLayer.getUsers());
     }
-   }
+
+
+}
 //переписывать текст с доски это тяжело...

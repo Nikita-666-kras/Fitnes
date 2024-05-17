@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class SetRequest {
+    private  String Name;
     private String img;
-
-
 }

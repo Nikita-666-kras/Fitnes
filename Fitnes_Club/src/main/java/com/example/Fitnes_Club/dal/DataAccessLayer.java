@@ -232,26 +232,27 @@ public class DataAccessLayer {
         session.close();
         return "Pabeda)";
     }
-    public String newImgToDatbase(String name, String img) {
+    public String newImgToDatbase(User user) {
         session = sessionFactory.openSession();
         session.beginTransaction();
+        String name = user.getName();
+
         Query query = session
                 .createQuery("FROM User where Name = :name")
                 .setParameter("name", name);
-        User user = (User) query.uniqueResult();
+        User userA = (User) query.uniqueResult();
 
-        if (user != null) {
 
-            user.setImg(img);
+        if (userA != null) {
+            userA.setImg(user.getImg());
 
-            session.merge(user);
             session.getTransaction().commit();
             session.close();
             return "OMG IMG";
         }
 
         else {
-            System.out.println("Пользователь с именем " + name + " не найден.");
+            System.out.println("Пользователь с именем " + userA + " не найден.");
         }
 
 
