@@ -2,7 +2,7 @@
 import api from '../api.js';
 import { useVuelidate } from '@vuelidate/core';
 import { required, email } from '@vuelidate/validators';
-import Cookies from 'js-cookie';
+
 
 export default {
   
@@ -29,6 +29,13 @@ export default {
     } 
   },
   methods: {
+
+    setPage(){
+      window.location.href="/reg";
+    },
+
+
+
     async signupUser() {
       const User = {
         name: this.userName,
@@ -44,7 +51,7 @@ export default {
               this.errorMessage = response.data.message;
               this.jwt = response.data;
               this.$cookies.remove('jwt');
-              this.$cookies.set('jwt', this.jwt, '1m');
+              this.$cookies.set('jwt', this.jwt, '1d');
               console.log(this.jwt);
               console.log('авторизован:', User);
               window.location.href = '/auth/main';
@@ -102,7 +109,9 @@ export default {
         </div>
         <div class="reg_Button">
           <button class="regBT" @click="signupUser()">отправить</button>
+
         </div>
+        <div class="regist"><a class="regi" @click="setPage()">зарегистрироваться</a></div>
       </div>
     </main>
     <footer></footer>
@@ -110,6 +119,13 @@ export default {
 </template>
 
 <style scoped>
+.regi{
+  color: black;
+}
+.regist{
+  margin-top: 50px;
+  
+}
 .error {
   font-size: 28px;
   color: red;

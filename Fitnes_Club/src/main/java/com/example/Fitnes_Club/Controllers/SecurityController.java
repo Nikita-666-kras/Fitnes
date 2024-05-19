@@ -3,6 +3,7 @@ package com.example.Fitnes_Club.Controllers;
 import com.example.Fitnes_Club.FitnesApplication;
 import com.example.Fitnes_Club.dto.SigninRequest;
 import com.example.Fitnes_Club.dto.SignupRequest;
+import com.example.Fitnes_Club.models.User;
 import com.example.Fitnes_Club.security.JwtCore;
 import com.example.Fitnes_Club.service.UserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +51,7 @@ public class SecurityController {
     ResponseEntity<?> signin(@RequestBody SigninRequest signinRequest) {
 
         UserDetails user = userService.loadUserByUsername(signinRequest.getName());
+
         String hashedPassword = passwordEncoder.encode(signinRequest.getPassword());
 
         if (Objects.equals(user, null) || !passwordEncoder.matches(signinRequest.getPassword(), user.getPassword())) {

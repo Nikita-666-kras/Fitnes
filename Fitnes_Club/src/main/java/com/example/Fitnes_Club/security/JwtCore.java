@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+
 import java.util.Date;
 
 @Component
@@ -16,7 +17,7 @@ public class JwtCore {
     private int lifetime;
 
     public String generateToken(UserDetails userDetails){
-        return Jwts.builder().setSubject(userDetails.getUsername()).setIssuedAt(new Date())
+        return Jwts.builder().claim("id",  ((UserDetailsImpl) userDetails).getId()).setSubject(userDetails.getUsername()).setIssuedAt(new Date())
                 .setExpiration(new Date((new Date().getTime() + lifetime)))
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();

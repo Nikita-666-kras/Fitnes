@@ -2,6 +2,13 @@
 <script setup>
 import api from '@/api';
 import Header from '@/components/Header.vue';
+// import jwt_decode from 'jwt-decode';
+import jwt_decode from 'vue-jwt-decode'
+// import * as jwt_decode from 'jwt-decode';
+
+// Далее ваш код для декодирования JWT токена и получения id пользователя
+
+
 </script>
 
 
@@ -13,39 +20,67 @@ export default {
   data() {
     return {
       visible: false,
+      User: {},
       // src : 'https://share-assets.mfcimg.com/packs-compiled/static/avatar-grey-4d1d556a3f7c835d738d.png',
       user: {
         name: '',
         email: '',
-        img: 'https://share-assets.mfcimg.com/packs-compiled/static/avatar-grey-4d1d556a3f7c835d738d.png',
+        img: '',
         resp: {},
+        userId: null,
       }
 
     };
   },
   methods:{
+    logOut(){
+      this.$cookies.remove('jwt');
+      window.location.href="/log"
+    },
+
+
     
     async setimg() {
-      const User = {
-        img: this.img
-       
+       this.User = {
+        name :this.user.name,
+        img: this.user.img,
       };
       try{
-        const response = await apiapi.post('/authorized/set/user/img',User)
-        .then(response =>{console.log(response.data)});
+        const response = await api.post('/authorized/set/user/img',this.User,
+        {
+          headers: {
+            'Authorization': 'Bearer ' + this.$cookies.get('jwt') 
+          }
+        }
+        )
+        .then(response =>{
+          console.log(response.data)
+          console.log(User)
+        });
       }
       catch(error){}
       
     }
   },
   mounted() {
+
+
+    const token = this.$cookies.get('jwt'); 
+    const decodedToken = jwt_decode.decode(token);
+
+    if (decodedToken) {
+         this.userId = decodedToken.id;
+        console.log(decodedToken.id ); // Вывод id пользователя
+    } else {
+        console.log('Неверный токен');
+    }
     
 
 
-    api.get('/authorized/get/user/3', {
-  headers: {
-    'Authorization': 'Bearer ' + this.$cookies.get('jwt') // Получаем JWT токен из cookie
-  }
+    api.get('/authorized/get/user/'+this.userId, {
+      headers: {
+        'Authorization': 'Bearer ' + this.$cookies.get('jwt') // Получаем JWT токен из cookie
+      }
 })
       .then(response => {
         this.user.name = response.data.name;
@@ -64,6 +99,7 @@ export default {
       .catch(error => {
         console.error('Ошибка при получении данных:', error);
       });
+      console.log(document.cookie);
   }
   
 };
@@ -77,15 +113,18 @@ export default {
     <img class="Ava" v-bind:src="user.img">
     <button class="set_img" @click="visible = true">поменять картинку</button>
     
-      <modal :show="visible">
-          <div>
-            <input type="text" v-model.trim="user.img" placeholder="вставьте ссылку на картинку"/>
+      <div v-show="visible">
+          <div  class="hre">
+            <p>вставьте ссылку на картинку</p>
+            <input type="text" v-model="user.img" placeholder="вставьте ссылку на картинку"/>
             <button class="set_img" @click="setimg()">Готово</button>
           </div>
-      </modal>  
+        </div>  
     <h1>Name: {{ user.name }}</h1>
     <p>Email: {{ user.email }}</p>
-    
+    <div class="logout">
+      <button class="b_logout" @click="logOut()">Выйти из аккаунта</button>
+    </div>
 
 
     </div>
@@ -94,9 +133,34 @@ export default {
 </template>
 
 <style scoped>
+.b_logout{
+  max-width: 450px;
+  border-radius: 30px;
+  border: none;
+  margin-top: 1%;
+  background-color: #45184c;
+  color: white;
+  margin-bottom: 5%;}
+.logout{
+  margin-top: 40px;
+  max-width: 25%;
+  display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+.hre{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 .set_img{
   border-radius: 30px;
   border: none;
+  margin-top: 1%;
   background-color: #45184c;
   color: white;
   margin-bottom: 5%;

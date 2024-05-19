@@ -54,7 +54,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/main/**").permitAll()
-                        .requestMatchers("/secured/**").fullyAuthenticated()
+                        .requestMatchers("/authorized/**").fullyAuthenticated()
                         .requestMatchers("/admin/**").fullyAuthenticated()
                         .anyRequest().permitAll())
                 .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);

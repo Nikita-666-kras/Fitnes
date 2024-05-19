@@ -12,8 +12,6 @@ public class Coach {
     private Long Id;
     @Column(name = "specialization")
     private String specialization;
-
-
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;

@@ -4,7 +4,7 @@ import carousel from '../components/carusel.vue';
 
 </script>
 <script>
-console.log(document.cookie);
+
 </script>
 
 <template>

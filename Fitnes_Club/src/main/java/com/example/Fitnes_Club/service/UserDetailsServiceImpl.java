@@ -22,6 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = new User();
         user.setName(signupRequest.getName());
         user.setEmail(signupRequest.getEmail());
+        user.getId();
         user.setPassword(signupRequest.getPassword());
         return dataAccessLayer.newUserToDatabase(user);
     }
@@ -31,6 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) return null;
         return UserDetailsImpl.build(user);
     }
+
     public User loadUserEntityByUsername(String username) throws UsernameNotFoundException {
         return dataAccessLayer.getUserFromDatabaseByUsername(username);
     }

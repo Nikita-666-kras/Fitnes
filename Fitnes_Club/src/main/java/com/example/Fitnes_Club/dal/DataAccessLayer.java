@@ -1,4 +1,5 @@
 package com.example.Fitnes_Club.dal;
+import ch.qos.logback.classic.Logger;
 import com.example.Fitnes_Club.models.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -235,7 +236,11 @@ public class DataAccessLayer {
     public String newImgToDatbase(User user) {
         session = sessionFactory.openSession();
         session.beginTransaction();
+
         String name = user.getName();
+
+
+
 
         Query query = session
                 .createQuery("FROM User where Name = :name")
@@ -245,7 +250,7 @@ public class DataAccessLayer {
 
         if (userA != null) {
             userA.setImg(user.getImg());
-
+//            session.merge(userA);
             session.getTransaction().commit();
             session.close();
             return "OMG IMG";

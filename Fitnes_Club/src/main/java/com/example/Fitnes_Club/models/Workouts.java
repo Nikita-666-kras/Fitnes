@@ -11,17 +11,20 @@ public class Workouts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long Id;
-    @Column(name = "Name")
-    private String Name;
-    @Column(name = "Age")
-    private int Age;
-    @Column(name = "role")
-    private String role;
-    @Column(name = "password")
-    private String password;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "start_date")
+    private String start_date;
+    @Column(name = "end_date")
+    private String end_date;
     @ManyToOne
     @JoinColumn(name  = "user_id")
     private User user;
+    @ManyToOne
+    @JoinColumn(name  = "coach_id")
+    private Coach coach;
     @ManyToOne
     @JoinColumn(name  = "exercises_id")
     private Exercises exercises;

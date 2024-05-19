@@ -10,6 +10,9 @@ export default {
     account() {
       window.location.href = '/auth/account';
     },
+    workout(){
+      window.location.href = '/auth/workout';
+    }
   },
 };
 </script>
@@ -51,7 +54,7 @@ export default {
     </div>
     <div class="buttons">
       <button @click="mainMenu()">Главная</button>
-      <button>Тренеровки</button>
+      <button @click="workout()">Тренеровки</button>
       <button @click="account()">Мой профиль</button>
     </div>
   </header>

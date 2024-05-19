@@ -10,16 +10,13 @@ public class Clients {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long Id;
-    @Column(name = "start_date")
-    private int start_date;
-    @Column(name = "end_date")
-    private int end_date;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "description")
+    private String description;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name="coach_id")
-    private Coach coach;
 }
