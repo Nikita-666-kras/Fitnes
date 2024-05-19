@@ -5,6 +5,8 @@ import { required, email } from '@vuelidate/validators';
 import Cookies from 'js-cookie';
 
 export default {
+  
+
   setup () {
     return { v$: useVuelidate() }
   },
@@ -41,14 +43,17 @@ export default {
               this.responseData = response.data;
               this.errorMessage = response.data.message;
               this.jwt = response.data;
+              this.$cookies.remove('jwt');
+              this.$cookies.set('jwt', this.jwt, '1m');
               console.log(this.jwt);
-              // window.location.href = '/auth/main';
+              console.log('авторизован:', User);
+              window.location.href = '/auth/main';
             })
             .catch((error) => {
               console.error(error);
               this.errorMessage = error.response.status;
             });
-          console.log(' не авторизован:', User);
+          
         } catch (error) {}
       }
     },
