@@ -9,6 +9,8 @@ export default {
     return {
       visible: false,
       User: {},
+      trainings: [0],
+      allTrainings : [],
       // src : 'https://share-assets.mfcimg.com/packs-compiled/static/avatar-grey-4d1d556a3f7c835d738d.png',
       workout: {
         name: '',
@@ -16,42 +18,53 @@ export default {
         workId: null,
         resp: {},
         userId: null,
+        trainingId: null,
+        
       }
 
     };
   },
   methods:{
 
-    getWorkOut(id){
-
-      
-      
-      api.get('/unauthorized/get/workouts/',id, {
+    
+    async fetchTrainingData(trainingId) {
+        try {
+            const response = await api.get('/unauthorized/get/workouts/'+trainingId, {
       headers: {
         'Authorization': 'Bearer ' + this.$cookies.get('jwt') // Получаем JWT токен из cookie
       }
-      })
-      .then(response => {
-        this.user.name = response.data.name;
-        this.user.email = response.data.email;
-        if (response.data.img != null){
-          this.user.img = response.data.img
-        }
-        else {
-          this.user.img = "https://share-assets.mfcimg.com/packs-compiled/static/avatar-grey-4d1d556a3f7c835d738d.png";
-
-        }
-
-        
-        console.log(response.data)
-      })
-      .catch(error => {
-        console.error('Ошибка при получении данных:', error);
       });
-      console.log(document.cookie);
-  }
+            console.log(response.data) ;
+        } catch (error) {
+            console.error(error);
+        }
     },
+    async fetchAllTrainings() {
+       
+        try {
+          try {
+            const response = await api.get('/unauthorized/get/workoutsId/', {
+      headers: {
+        'Authorization': 'Bearer ' + this.$cookies.get('jwt') 
+      }
+      });
+           console.log(response.data);
+            this.allTrainings.push(response.data.id);
+        } catch (error) {
+            console.error(error);
+        }
+          
+             // Пример ID тренировок
 
+            for (const trainingId of allTrainings) {
+                const trainingData = await this.fetchTrainingData(trainingId);
+                this.trainings.push(trainingData);
+                console.log(trainingData);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    },
 
 
     
@@ -85,7 +98,7 @@ export default {
     },
 
   mounted(){
-
+    this.fetchAllTrainings();
 
     const token = this.$cookies.get('jwt'); 
     const decodedToken = jwt_decode.decode(token);
@@ -102,21 +115,31 @@ export default {
     
   
 
-
+}
 
 </script>
 
 <template>
     <Header/>
+
+    
+
+        
+
     <div class="main">
         <div class="container">
+          
         <h1>Мои тренировки</h1>
-
+        
         <div class="workout">
-            <h2 >{{name}}</h2>
-            <p>Описание тренировки 1...</p>
+          <div v-for="training in trainings" :key="training.id">
+            <h2 >{{training.name}}</h2>
+            <p>{{training.description}}</p>
+            <ul>
+                <li v-for="exercise in training.exercises" :key="exercise.id">{{ exercise.name }}</li>
+            </ul>
         </div>
-
+      </div>
         <div class="workout">
             <h2>Тренировка 2</h2>
             <p>Описание тренировки 2...</p>
@@ -169,3 +192,44 @@ export default {
             color: #666;
         }
 </style>
+
+
+
+
+
+
+
+//   getWorkOut(id){
+
+      
+      
+  //     api.get('/unauthorized/get/workouts/',id, {
+  //     headers: {
+  //       'Authorization': 'Bearer ' + this.$cookies.get('jwt') // Получаем JWT токен из cookie
+  //     }
+  //     })
+  //     .then(response => {
+  //       this.user.name = response.data.name;
+  //       this.user.email = response.data.email;
+  //       if (response.data.img != null){
+  //         this.user.img = response.data.img
+  //       }
+  //       else {
+  //         this.user.img = "https://share-assets.mfcimg.com/packs-compiled/static/avatar-grey-4d1d556a3f7c835d738d.png";
+
+  //       }
+
+        
+  //       console.log(response.data)
+  //     })
+  //     .catch(error => {
+  //       console.error('Ошибка при получении данных:', error);
+  //     });
+  //     console.log(document.cookie);
+  // }
+  //   },
+
+
+
+
+ 

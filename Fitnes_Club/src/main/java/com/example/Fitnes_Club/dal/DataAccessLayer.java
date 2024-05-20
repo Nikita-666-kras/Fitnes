@@ -116,6 +116,16 @@ public class DataAccessLayer {
         List<Workouts> resultList = session.createQuery(query).getResultList();
         return resultList;
     }
+    public List<Workouts> getWorkoutsID(){
+        session = sessionFactory.openSession();
+        session.getTransaction().begin();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Workouts> query = builder.createQuery(Workouts.class);
+        Root<Workouts> root = query.from(Workouts.class);
+        query.select(builder.construct(Workouts.class, root.get("id")));
+        List<Workouts> resultList = session.createQuery(query).getResultList();
+        return resultList;
+    }
 
 
     public void createClients(Clients newClients) {

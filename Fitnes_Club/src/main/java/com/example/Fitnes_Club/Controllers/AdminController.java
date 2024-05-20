@@ -92,5 +92,9 @@ public class AdminController {
         dataAccessLayer.newImgToDatbase(user);
         return ResponseEntity.ok("Ура картинка!");
     }
+    @GetMapping("get/workoutsId/")
+    public ResponseEntity getWorkoutsID() {
+        return ResponseEntity.ok(dataAccessLayer.getWorkoutsID());
+    }
 
 }
