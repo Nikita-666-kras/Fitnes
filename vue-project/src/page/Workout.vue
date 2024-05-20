@@ -1,5 +1,7 @@
 <script setup>
 import Header from '@/components/Header.vue';
+import { error } from 'cli';
+import jwt_decode from 'vue-jwt-decode';
 </script>
 
 <script>
@@ -11,6 +13,7 @@ export default {
       User: {},
       trainings: [0],
       allTrainings : [],
+      
       // src : 'https://share-assets.mfcimg.com/packs-compiled/static/avatar-grey-4d1d556a3f7c835d738d.png',
       workout: {
         name: '',
@@ -18,7 +21,7 @@ export default {
         workId: null,
         resp: {},
         userId: null,
-        trainingId: null,
+        
         
       }
 
@@ -29,12 +32,10 @@ export default {
     
     async fetchTrainingData(trainingId) {
         try {
-            const response = await api.get('/unauthorized/get/workouts/'+trainingId, {
-      headers: {
-        'Authorization': 'Bearer ' + this.$cookies.get('jwt') // Получаем JWT токен из cookie
-      }
-      });
-            console.log(response.data) ;
+            const response = await api.get('/unauthorized/get/workouts/'+trainingId).then(response=>{
+              console.log(response.data) ;
+            });
+           
         } catch (error) {
             console.error(error);
         }
@@ -43,12 +44,15 @@ export default {
        
         try {
           try {
-            const response = await api.get('/unauthorized/get/workoutsId/', {
+            const response = await api.get('/authorized/get/workoutsId/', {
       headers: {
         'Authorization': 'Bearer ' + this.$cookies.get('jwt') 
       }
-      });
-           console.log(response.data);
+      })
+      .then(response=>{console.log(response.data)})
+      .catch(error=>{console.log(error)});
+
+           
             this.allTrainings.push(response.data.id);
         } catch (error) {
             console.error(error);
