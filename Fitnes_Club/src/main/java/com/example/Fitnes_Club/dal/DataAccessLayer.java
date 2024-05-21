@@ -1,5 +1,5 @@
 package com.example.Fitnes_Club.dal;
-import ch.qos.logback.classic.Logger;
+
 import com.example.Fitnes_Club.models.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -116,17 +116,45 @@ public class DataAccessLayer {
         List<Workouts> resultList = session.createQuery(query).getResultList();
         return resultList;
     }
-    public List<Workouts> getWorkoutsID(){
+    public List<Exercises> getExercise(){
         session = sessionFactory.openSession();
         session.getTransaction().begin();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Workouts> query = builder.createQuery(Workouts.class);
-        Root<Workouts> root = query.from(Workouts.class);
-        query.select(builder.construct(Workouts.class, root.get("id")));
-        List<Workouts> resultList = session.createQuery(query).getResultList();
+        CriteriaQuery<Exercises> query = builder.createQuery(Exercises.class);
+        Root<Exercises> root = query.from(Exercises.class);
+        query.select(root);
+        List<Exercises> resultList = session.createQuery(query).getResultList();
         return resultList;
     }
 
+
+
+
+//    public List<Workouts> getWorkoutsID(){
+//        session = sessionFactory.openSession();
+//        session.getTransaction().begin();
+//        CriteriaBuilder builder = session.getCriteriaBuilder();
+//        CriteriaQuery<Workouts> query = builder.createQuery(Workouts.class);
+//        Root<Workouts> root = query.from(Workouts.class);
+//        query.select(builder.construct(Workouts.class, root.get("id")));
+//        System.out.println(query);
+//        List<Workouts> resultList = session.createQuery(query).getResultList();
+//        return resultList;
+//    }
+public List<Long> getWorkoutsID(){
+    session = sessionFactory.openSession();
+    session.getTransaction().begin();
+    CriteriaBuilder builder = session.getCriteriaBuilder();
+
+    CriteriaQuery<Long> query = builder.createQuery(Long.class);
+    Root<Workouts> root = query.from(Workouts.class);
+
+    query.select(root.get("id"));
+    System.out.println(query);
+
+    List<Long> resultList = session.createQuery(query).getResultList();
+    return resultList;
+}
 
     public void createClients(Clients newClients) {
         session = sessionFactory.openSession();

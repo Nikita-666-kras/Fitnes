@@ -96,5 +96,17 @@ public class AdminController {
     public ResponseEntity getWorkoutsID() {
         return ResponseEntity.ok(dataAccessLayer.getWorkoutsID());
     }
+    @GetMapping("get/workouts/{id}")
+    public ResponseEntity getWorkoutsById(@PathVariable("id") long id) {
+        return ResponseEntity.ok(dataAccessLayer.getWorkouts(id));
+    }
+    @GetMapping("get/workouts/")
+    public ResponseEntity getWorkouts() {
+        return ResponseEntity.ok(dataAccessLayer.getWorkouts());
+    }
 
+    @GetMapping("get/exercise/")
+    public ResponseEntity getExercise() {
+        return ResponseEntity.ok(dataAccessLayer.getExercise());
+    }
 }

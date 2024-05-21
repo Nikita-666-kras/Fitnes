@@ -9,33 +9,26 @@ import api from '@/api.js'
 export default {
   data() {
     return {
-      trainings: [],
+      exercise: [],
       WorkIDlist:null
     };
   },
   methods: {
     async fetchTrainingData() {
-
-
-
-
-
       try {
-        const response = await api.get('/authorized/get/workouts/' , {
+        const response = await api.get('/authorized/get/exercise/' , {
           headers: {
             'Authorization': 'Bearer ' + this.$cookies.get('jwt')
           }
         }).then(response=>{
-           this.trainings = response.data
+           this.exercise = response.data
         });
          
       } catch (error) {
         console.error(error);
       }
     },
-    exercises(){
-      window.location.href="/auth/exercises";
-    }
+
 
 
     
@@ -61,16 +54,16 @@ export default {
 
     <div class="main">
       <div class="container">
-        <h1>Мои тренировки</h1>
+        <h1>Упражнения</h1>
 
 
-        <div class="workout" v-for="training in trainings" :key="training.id">
-          <h2>{{ training.name }}</h2>
-          <p>{{ training.description }}</p>
+        <div class="workout" v-for="exercises in exercise" :key="exercise.id">
+          <h2>{{ exercises.name }}</h2>
+          <p>{{ exercises.description }}</p>
           <!-- <ul>
             <li v-for="exercise in training.exercises" :key="exercise.id">{{ exercise.name }}</li>
           </ul> -->
-          <button type="button" class="BTN"@click="exercises()">Подробнее</button>
+          
         </div>
       </div>
     </div>

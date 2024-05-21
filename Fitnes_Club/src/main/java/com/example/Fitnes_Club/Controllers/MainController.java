@@ -43,15 +43,9 @@ public class MainController {
     }
 
 
-    @GetMapping("get/workouts/{id}")
-    public ResponseEntity getWorkoutsById(@PathVariable("id") long id) {
-        return ResponseEntity.ok(dataAccessLayer.getWorkouts(id));
-    }
 
-    @GetMapping("get/workouts/")
-    public ResponseEntity getWorkouts() {
-        return ResponseEntity.ok(dataAccessLayer.getWorkouts());
-    }
+
+
 
 
     @GetMapping("get/clients/{id}")

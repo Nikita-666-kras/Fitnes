@@ -6,6 +6,7 @@ import HomePage from './page/HomePage.vue';
 import MainPage from './page/MainPage.vue';
 import Account from '@/page/Account.vue';
 import Workout from '@/page/Workout.vue';
+import Exercises from '@/page/Exercises.vue';
 
 export default createRouter({
   history: createWebHistory(),
@@ -15,7 +16,8 @@ export default createRouter({
     { path: '/log', component: LogPage },
     { path: '/auth/main', component: MainPage },
     { path: '/auth/account', component: Account },
-    {path: '/auth/workout',component:Workout}
+    {path: '/auth/workout',component:Workout},
+    {path: '/auth/exercises',component:Exercises}
   
 
     // {path:"/auth/main",component:AuthMain},
