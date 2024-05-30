@@ -29,6 +29,8 @@ public class DataAccessLayer {
             session.close();
         }
     }
+
+
     public void deleteCoach(Long id) {
         session = sessionFactory.openSession();
         session.beginTransaction();
@@ -126,6 +128,53 @@ public class DataAccessLayer {
         List<Exercises> resultList = session.createQuery(query).getResultList();
         return resultList;
     }
+
+
+    public void createExercise(Exercises exercises) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.persist(exercises);
+        session.getTransaction().commit();
+        if (session != null) {
+            session.close();
+        }
+    }
+
+
+    public void deleteExercises(Long id) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Exercises exercises = session.get(Exercises.class, id);
+        session.remove(exercises);
+        session.getTransaction().commit();
+        if (session != null) {
+            session.close();
+        }
+    }
+
+    public void updateExercises(Long id, Exercises updatedExercises){
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Exercises exercises = session.get(Exercises.class, id);
+        exercises.setName(updatedExercises.getName());
+        session.merge(exercises);
+        session.getTransaction().commit();
+    }
+    public Exercises getExercises(Long id) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Exercises exercises = session.get(Exercises.class, id);
+        session.getTransaction().commit();
+        if (session != null) {
+            session.close();
+        }
+        return exercises;
+    }
+
+
+
+
+
 
 
 
@@ -301,6 +350,11 @@ public List<Long> getWorkoutsID(){
 
         return "картинка есть";
     }
+
+
+
+
+
 
 
 

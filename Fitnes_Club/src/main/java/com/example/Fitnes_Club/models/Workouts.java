@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "workouts", schema = "schema", catalog = "FitnesBD")
@@ -25,8 +27,9 @@ public class Workouts {
     @ManyToOne
     @JoinColumn(name  = "coach_id")
     private Coach coach;
-    @ManyToOne
-    @JoinColumn(name  = "exercises_id")
-    private Exercises exercises;
+
+    @OneToMany(mappedBy = "workouts", cascade = CascadeType.ALL)
+    private List<Exercises> exercises;
+
 
 }

@@ -8,7 +8,7 @@ import headerNO from '../components/headerNO.vue';
   <headerNO />
   <carusel />
   <cards />
-  <cards />
+  
 </template>
 
 <style scoped>

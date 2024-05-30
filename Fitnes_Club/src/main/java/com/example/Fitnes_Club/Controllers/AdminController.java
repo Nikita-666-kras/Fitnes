@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Slf4j
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
@@ -105,8 +108,43 @@ public class AdminController {
         return ResponseEntity.ok(dataAccessLayer.getWorkouts());
     }
 
-    @GetMapping("get/exercise/")
+    @GetMapping("get/exercises/")
     public ResponseEntity getExercise() {
         return ResponseEntity.ok(dataAccessLayer.getExercise());
+    }
+
+    @GetMapping("get/exercises/{id}")
+    public ResponseEntity getExercisesById(@PathVariable("id") long id) {
+        return ResponseEntity.ok(dataAccessLayer.getExercises(id));
+    }
+
+
+    @PostMapping("create/exercises/")
+    public ResponseEntity<String> createExercises(@RequestBody Exercises exercises) {
+        dataAccessLayer.createExercise(exercises);
+        return ResponseEntity.ok("PABEDA!");
+    }
+
+    @DeleteMapping("delete/exercises/{id}")
+    public ResponseEntity deleteExercisesById(@PathVariable("id") long id) {
+        dataAccessLayer.deleteExercises(id);
+        return ResponseEntity.ok("Cage номер " + id + " больше не Hru");
+    }
+
+    @PostMapping("update/exercises/{id}")
+    public ResponseEntity updateExercisesById(@PathVariable("id") long id, @RequestBody Exercises updatedExercises) {
+        dataAccessLayer.updateExercises(id, updatedExercises);
+        return ResponseEntity.ok("");
+    }
+
+
+
+
+    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+    public void someMethod() {
+        logger.debug("Debug message");
+        logger.info("Info message");
+        logger.warn("Warning message");
+        logger.error("Error message");
     }
 }
