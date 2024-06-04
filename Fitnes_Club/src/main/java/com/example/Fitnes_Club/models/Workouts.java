@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 
 import lombok.Data;
 
+
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -21,6 +23,9 @@ public class Workouts {
     private String start_date;
     @Column(name = "end_date")
     private String end_date;
+
+
+
     @ManyToOne
     @JoinColumn(name  = "user_id")
     private User user;
@@ -28,8 +33,12 @@ public class Workouts {
     @JoinColumn(name  = "coach_id")
     private Coach coach;
 
-    @OneToMany(mappedBy = "workouts", cascade = CascadeType.ALL)
-    private List<Exercises> exercises;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "workout_id",referencedColumnName = "work_id")
+    private List<Exercises> exer_id ;
+
+
 
 
 }
