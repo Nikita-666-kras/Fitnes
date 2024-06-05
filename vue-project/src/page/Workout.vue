@@ -61,7 +61,7 @@ export default {
 
     <div class="main">
       <div class="container">
-        <h1>Мои тренировки</h1>
+        <h1>Все тренировки</h1>
 
 
         <div class="workout" v-for="training in trainings" :key="training.id">

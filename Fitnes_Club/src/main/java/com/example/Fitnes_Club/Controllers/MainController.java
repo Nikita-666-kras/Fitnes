@@ -51,16 +51,6 @@ public class MainController {
 
 
 
-    @GetMapping("get/clients/{id}")
-    public ResponseEntity getClientsById(@PathVariable("id") long id) {
-        return ResponseEntity.ok(dataAccessLayer.getClients(id));
-    }
-
-    @GetMapping("get/clients/")
-    public ResponseEntity getClients() {
-        return ResponseEntity.ok(dataAccessLayer.getClients());
-    }
-
     @GetMapping("get/users/")
     public ResponseEntity getUsers() {
         System.out.println("pop");

@@ -21,15 +21,9 @@ public class Workouts {
     private String start_date;
     @Column(name = "end_date")
     private String end_date;
-    @ManyToOne
-    @JoinColumn(name  = "user_id")
-    private User user;
-    @ManyToOne
-    @JoinColumn(name  = "coach_id")
-    private Coach coach;
 
-    @OneToMany(mappedBy = "workouts", cascade = CascadeType.ALL)
-    private List<Exercises> exercises;
+
+
 
 
 }

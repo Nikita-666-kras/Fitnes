@@ -1,6 +1,7 @@
 package com.example.Fitnes_Club.Controllers;
 
 import com.example.Fitnes_Club.FitnesApplication;
+import com.example.Fitnes_Club.dal.DataAccessLayer;
 import com.example.Fitnes_Club.dto.SigninRequest;
 import com.example.Fitnes_Club.dto.SignupRequest;
 import com.example.Fitnes_Club.models.User;
@@ -18,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
+import java.util.Set;
 
 @RestController
 @Slf4j
@@ -25,9 +27,11 @@ import java.util.Objects;
 @CrossOrigin(origins = "http://localhost:8080")
 public class SecurityController {
     private final UserDetailsServiceImpl userService;
+    private final DataAccessLayer dataAccessLayer;
     @Autowired
-    public SecurityController(UserDetailsServiceImpl userService) {
+    public SecurityController(UserDetailsServiceImpl userService, DataAccessLayer dataAccessLayer) {
         this.userService = userService;
+        this.dataAccessLayer = dataAccessLayer;
     }
     @Autowired
     private JwtCore jwtCore;
@@ -39,6 +43,7 @@ public class SecurityController {
     @CrossOrigin(origins = "http://localhost:3000")
     ResponseEntity<?> signup(@RequestBody SignupRequest signupRequest) {
         signupRequest.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
+        signupRequest.setRoles(Set.of("ROLE_USER"));
         String serviceResult = userService.newUser(signupRequest);
         if (Objects.equals(serviceResult, "Выберите другое имя")) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(serviceResult);

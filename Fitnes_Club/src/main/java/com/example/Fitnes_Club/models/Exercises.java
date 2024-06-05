@@ -14,9 +14,6 @@ public class Exercises {
     private String Name;
     @Column(name = "description")
     private String description;
-    @ManyToOne
-    @JoinColumn(name = "workouts_id")
-    private Workouts workouts;
 
 
 }

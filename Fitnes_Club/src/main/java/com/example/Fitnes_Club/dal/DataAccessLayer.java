@@ -179,7 +179,7 @@ public class DataAccessLayer {
 
 
 
-//    public List<Workouts> getWorkoutsID(){
+    //    public List<Workouts> getWorkoutsID(){
 //        session = sessionFactory.openSession();
 //        session.getTransaction().begin();
 //        CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -190,68 +190,22 @@ public class DataAccessLayer {
 //        List<Workouts> resultList = session.createQuery(query).getResultList();
 //        return resultList;
 //    }
-public List<Long> getWorkoutsID(){
-    session = sessionFactory.openSession();
-    session.getTransaction().begin();
-    CriteriaBuilder builder = session.getCriteriaBuilder();
-
-    CriteriaQuery<Long> query = builder.createQuery(Long.class);
-    Root<Workouts> root = query.from(Workouts.class);
-
-    query.select(root.get("id"));
-    System.out.println(query);
-
-    List<Long> resultList = session.createQuery(query).getResultList();
-    return resultList;
-}
-
-    public void createClients(Clients newClients) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.persist(newClients);
-        session.getTransaction().commit();
-        if (session != null) {
-            session.close();
-        }
-    }
-    public void deleteClients(Long id) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        Clients clients = session.get(Clients.class, id);
-        session.remove(clients);
-        session.getTransaction().commit();
-        if (session != null) {
-            session.close();
-        }
-    }
-    public void updateClients(Long id, Clients updatedClients){
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        Clients clients = session.get(Clients.class, id);
-
-        session.merge(clients);
-        session.getTransaction().commit();
-    }
-    public Clients getClients(Long id) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        Clients clients = session.get(Clients.class, id);
-        session.getTransaction().commit();
-        if (session != null) {
-            session.close();
-        }
-        return clients;
-    }
-    public List<Clients> getClients(){
+    public List<Long> getWorkoutsID(){
         session = sessionFactory.openSession();
         session.getTransaction().begin();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Clients> query = builder.createQuery(Clients.class);
-        Root<Clients> root = query.from(Clients.class);
-        query.select(root);
-        List<Clients> resultList = session.createQuery(query).getResultList();
+
+        CriteriaQuery<Long> query = builder.createQuery(Long.class);
+        Root<Workouts> root = query.from(Workouts.class);
+
+        query.select(root.get("id"));
+        System.out.println(query);
+
+        List<Long> resultList = session.createQuery(query).getResultList();
         return resultList;
     }
+
+
     public void createUser(User newUser) {
         session = sessionFactory.openSession();
         session.beginTransaction();
