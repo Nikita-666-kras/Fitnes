@@ -53,10 +53,10 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/unauthorized/**").permitAll()
-                        .requestMatchers("/authorized/**").authenticated()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .anyRequest().authenticated())
+                        .requestMatchers("/main/**").permitAll()
+                        .requestMatchers("/authorized/**").fullyAuthenticated()
+                        .requestMatchers("/admin/**").fullyAuthenticated()
+                        .anyRequest().permitAll())
                 .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

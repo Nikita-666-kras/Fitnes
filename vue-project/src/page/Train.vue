@@ -1,27 +1,24 @@
 
+
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Header from '@/components/Header.vue';
 import api from '@/api.js';
-import jwt_decode from 'vue-jwt-decode';
 
-const workouts = ref(null);
+const training = ref(null);
 const route = useRoute();
 
 const fetchTrainingDetail = async () => {
-  const token = $cookies.get('jwt'); 
-    const decodedToken = jwt_decode.decode(token);
-    const user_id=decodedToken.id;
-  
+  const id = route.params.id;
   try {
-    const response = await api.get(`/authorized/get/train/${user_id}`, {
+    const response = await api.get(`/authorized/get/workouts/${id}`, {
       headers: {
         'Authorization': 'Bearer ' + $cookies.get('jwt')
       }
-    })
+    });
     console.log(response.data);
-    workouts.value = response.data;
+    training.value = response.data;
     
   } catch (error) {
     console.error(error);
@@ -40,11 +37,11 @@ onMounted(fetchTrainingDetail);
 <template>
   <div>
     <Header />
-    <div class="card" v-for="workout in workouts" :key="workout.id">
-      <h1>{{ workout.workouts.name }}</h1>
-      <p>{{ workout.workouts.description }}</p>
-      <p>{{ workout.workouts.start_date }}</p>
-      <p>{{ workout.workouts.end_date }}</p>
+    <div class="container" v-if="training">
+      <h1>{{ training.name }}</h1>
+      <p>{{ training.description }}</p>
+      <p>{{ training.start_date }}</p>
+      <p>{{ training.end_date }}</p>
       <h3>Упражнения</h3>
       <ul>
         <!-- <li v-for="exercise in training.exercises" :key="exercise.id">{{ exercise.name }}</li> -->

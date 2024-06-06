@@ -1,72 +1,28 @@
 package com.example.Fitnes_Club.Controllers;
+
 import com.example.Fitnes_Club.dal.DataAccessLayer;
-import com.example.Fitnes_Club.dto.SignupRequest;
-import com.example.Fitnes_Club.models.Coach;
-import com.example.Fitnes_Club.models.User;
-import com.example.Fitnes_Club.models.Workouts;
-import com.example.Fitnes_Club.security.JwtCore;
-import com.example.Fitnes_Club.service.UserDetailsServiceImpl;
+import com.example.Fitnes_Club.models.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Objects;
-import java.util.Set;
+import java.util.List;
 
 @Slf4j
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
-@RequestMapping("/admin")
+@RequestMapping("/authorized")
 public class AdminController {
-    private final UserDetailsServiceImpl userService;
+
     private final DataAccessLayer dataAccessLayer;
     @Autowired
-    public AdminController(UserDetailsServiceImpl userService, DataAccessLayer dataAccessLayer) {
-        this.userService = userService;
+    public AdminController(DataAccessLayer dataAccessLayer) {
         this.dataAccessLayer = dataAccessLayer;
     }
-    @Autowired
-    private JwtCore jwtCore;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-
-    @GetMapping("/user")
-    public void user() {
-        log.info("Gracias Senior user");
-    }
-
-    @GetMapping("/admin")
-    public void admin() {
-        log.info("Gracias Senior admin");
-    }
-
-    @PostMapping("/create")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> createAdmin(@RequestBody SignupRequest signupRequest) {
-        signupRequest.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
-        signupRequest.setRoles(Set.of("ROLE_ADMIN"));
-        String serviceResult = userService.newUser(signupRequest);
-        if (Objects.equals(serviceResult, "Выберите другое имя")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(serviceResult);
-        }
-        if (Objects.equals(serviceResult, "Выберите другую почту")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(serviceResult);
-        }
-        return ResponseEntity.ok("Администратор успешно создан.");
-    }
-
-
-
-
     @PostMapping("create/coach/")
     public ResponseEntity<String> createCoach(@RequestBody Coach coach) {
         dataAccessLayer.createCoach(coach);
@@ -100,11 +56,93 @@ public class AdminController {
         dataAccessLayer.updateWorkouts(id, updatedWorkouts);
         return ResponseEntity.ok("");
     }
-
     @PostMapping("create/user/")
     public ResponseEntity<String> createUser(@RequestBody User user) {
         dataAccessLayer.createUser(user);
         return ResponseEntity.ok("PABEDA!");
     }
+    @DeleteMapping("delete/user/{id}")
+    public ResponseEntity deleteUserById(@PathVariable("id") long id) {
+        dataAccessLayer.deleteUser(id);
+        return ResponseEntity.ok("User номер " + id + " больше не Hru");
+    }
+    @PostMapping("update/user/{id}")
+    public ResponseEntity updateUserById(@PathVariable("id") long id, @RequestBody User updatedUser) {
+        dataAccessLayer.updateUser(id, updatedUser);
+        return ResponseEntity.ok("");
+    }
+    @GetMapping("get/user/{id}")
+    public ResponseEntity getUserById(@PathVariable("id") long id) {
+        return ResponseEntity.ok(dataAccessLayer.getUser(id));
+    }
+    @PostMapping("set/user/img")
+    public ResponseEntity newImgToDatbase(@RequestBody User user) {
+        log.info(user.getName());
+        dataAccessLayer.newImgToDatbase(user);
+        return ResponseEntity.ok("Ура картинка!");
+    }
+    @GetMapping("get/workoutsId/")
+    public ResponseEntity getWorkoutsID() {
+        return ResponseEntity.ok(dataAccessLayer.getWorkoutsID());
+    }
+    @GetMapping("get/workouts/{id}")
+    public ResponseEntity getWorkoutsById(@PathVariable("id") long id) {
+        return ResponseEntity.ok(dataAccessLayer.getWorkouts(id));
+    }
+    @GetMapping("get/workouts/")
+    public ResponseEntity getWorkouts() {
+        return ResponseEntity.ok(dataAccessLayer.getWorkouts());
+    }
 
+    @GetMapping("get/exercises/")
+    public ResponseEntity getExercise() {
+        return ResponseEntity.ok(dataAccessLayer.getExercise());
+    }
+
+    @GetMapping("get/exercises/{id}")
+    public ResponseEntity getExercisesById(@PathVariable("id") long id) {
+        return ResponseEntity.ok(dataAccessLayer.getExercises(id));
+    }
+    @GetMapping("/train/workouts/{workoutsId}")
+    public List<Train> getTrainByWorkoutsId(@PathVariable Long workoutsId) {
+        return dataAccessLayer.getTrainByWorkoutsId(workoutsId);
+    }
+    @GetMapping("/get/train/{userId}")
+
+    public ResponseEntity<List<Train>> getBasketsByUserId(@PathVariable("userId") long userId) {
+        return ResponseEntity.ok(dataAccessLayer.getBasketsByUserId(userId));
+    }
+
+    @PostMapping("create/exercises/")
+    public ResponseEntity<String> createExercises(@RequestBody Exercises exercises) {
+        dataAccessLayer.createExercise(exercises);
+        return ResponseEntity.ok("PABEDA!");
+    }
+    @PostMapping("create/train/")
+    public ResponseEntity<String> createTrain(@RequestBody Train train) {
+        dataAccessLayer.createTrain(train);
+        return ResponseEntity.ok("PABEDA!");
+    }
+    @DeleteMapping("delete/exercises/{id}")
+    public ResponseEntity deleteExercisesById(@PathVariable("id") long id) {
+        dataAccessLayer.deleteExercises(id);
+        return ResponseEntity.ok("Cage номер " + id + " больше не Hru");
+    }
+
+    @PostMapping("update/exercises/{id}")
+    public ResponseEntity updateExercisesById(@PathVariable("id") long id, @RequestBody Exercises updatedExercises) {
+        dataAccessLayer.updateExercises(id, updatedExercises);
+        return ResponseEntity.ok("");
+    }
+
+
+
+
+    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+    public void someMethod() {
+        logger.debug("Debug message");
+        logger.info("Info message");
+        logger.warn("Warning message");
+        logger.error("Error message");
+    }
 }

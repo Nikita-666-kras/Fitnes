@@ -18,7 +18,6 @@ public class UserDetailsImpl implements UserDetails {
     private String img;
     private String Email;
     private String password;
-
     public static UserDetailsImpl build(User user){
         return new UserDetailsImpl(
                 user.getId(),

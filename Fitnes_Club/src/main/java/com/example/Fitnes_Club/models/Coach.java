@@ -14,4 +14,7 @@ public class Coach {
     private String specialization;
     @Column(name = "name")
     private String name;
+    @OneToOne
+    @JoinColumn(name  = "User_id")
+    private User user;
 }

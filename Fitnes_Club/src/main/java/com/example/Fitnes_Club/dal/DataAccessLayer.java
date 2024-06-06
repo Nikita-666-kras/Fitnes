@@ -46,7 +46,7 @@ public class DataAccessLayer {
         session.beginTransaction();
         Coach coach = session.get(Coach.class, id);
         coach.setSpecialization(newCoach.getSpecialization());
-
+        coach.setName(newCoach.getName());
         session.merge(coach);
         session.getTransaction().commit();
     }
@@ -80,6 +80,24 @@ public class DataAccessLayer {
             session.close();
         }
     }
+    public void createTrain(Train newTrain) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.persist(newTrain);
+        session.getTransaction().commit();
+        if (session != null) {
+            session.close();
+        }
+    }
+    public List<Train> getTrainByWorkoutsId(Long workoutsId) {
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            String hql = "FROM Train WHERE workouts.id = :workoutsId";
+            Query<Train> query = session.createQuery(hql, Train.class);
+            query.setParameter("workoutsId", workoutsId);
+            session.getTransaction().commit();
+            return query.list();
+        }
     public void deleteWorkouts(Long id) {
         session = sessionFactory.openSession();
         session.beginTransaction();
@@ -179,7 +197,7 @@ public class DataAccessLayer {
 
 
 
-    //    public List<Workouts> getWorkoutsID(){
+//    public List<Workouts> getWorkoutsID(){
 //        session = sessionFactory.openSession();
 //        session.getTransaction().begin();
 //        CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -190,20 +208,20 @@ public class DataAccessLayer {
 //        List<Workouts> resultList = session.createQuery(query).getResultList();
 //        return resultList;
 //    }
-    public List<Long> getWorkoutsID(){
-        session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
+public List<Long> getWorkoutsID(){
+    session = sessionFactory.openSession();
+    session.getTransaction().begin();
+    CriteriaBuilder builder = session.getCriteriaBuilder();
 
-        CriteriaQuery<Long> query = builder.createQuery(Long.class);
-        Root<Workouts> root = query.from(Workouts.class);
+    CriteriaQuery<Long> query = builder.createQuery(Long.class);
+    Root<Workouts> root = query.from(Workouts.class);
 
-        query.select(root.get("id"));
-        System.out.println(query);
+    query.select(root.get("id"));
+    System.out.println(query);
 
-        List<Long> resultList = session.createQuery(query).getResultList();
-        return resultList;
-    }
+    List<Long> resultList = session.createQuery(query).getResultList();
+    return resultList;
+}
 
 
     public void createUser(User newUser) {
@@ -308,7 +326,13 @@ public class DataAccessLayer {
 
 
 
-
+    public List<Train> getBasketsByUserId(Long userId) {
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+        return session.createQuery("SELECT b FROM Train b WHERE b.user.id = :userId", Train.class)
+                .setParameter("userId", userId)
+                .getResultList();
+    }
 
 
 
