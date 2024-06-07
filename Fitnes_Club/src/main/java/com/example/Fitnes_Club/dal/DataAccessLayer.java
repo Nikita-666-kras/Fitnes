@@ -46,7 +46,7 @@ public class DataAccessLayer {
         session.beginTransaction();
         Coach coach = session.get(Coach.class, id);
         coach.setSpecialization(newCoach.getSpecialization());
-
+        coach.setName(newCoach.getName());
         session.merge(coach);
         session.getTransaction().commit();
     }
@@ -80,6 +80,24 @@ public class DataAccessLayer {
             session.close();
         }
     }
+    public void createTrain(Train newTrain) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.persist(newTrain);
+        session.getTransaction().commit();
+        if (session != null) {
+            session.close();
+        }
+    }
+    public List<Train> getTrainByWorkoutsId(Long workoutsId) {
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            String hql = "FROM Train WHERE workouts.id = :workoutsId";
+            Query<Train> query = session.createQuery(hql, Train.class);
+            query.setParameter("workoutsId", workoutsId);
+            session.getTransaction().commit();
+            return query.list();
+        }
     public void deleteWorkouts(Long id) {
         session = sessionFactory.openSession();
         session.beginTransaction();
@@ -205,53 +223,7 @@ public List<Long> getWorkoutsID(){
     return resultList;
 }
 
-    public void createClients(Clients newClients) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.persist(newClients);
-        session.getTransaction().commit();
-        if (session != null) {
-            session.close();
-        }
-    }
-    public void deleteClients(Long id) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        Clients clients = session.get(Clients.class, id);
-        session.remove(clients);
-        session.getTransaction().commit();
-        if (session != null) {
-            session.close();
-        }
-    }
-    public void updateClients(Long id, Clients updatedClients){
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        Clients clients = session.get(Clients.class, id);
 
-        session.merge(clients);
-        session.getTransaction().commit();
-    }
-    public Clients getClients(Long id) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        Clients clients = session.get(Clients.class, id);
-        session.getTransaction().commit();
-        if (session != null) {
-            session.close();
-        }
-        return clients;
-    }
-    public List<Clients> getClients(){
-        session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Clients> query = builder.createQuery(Clients.class);
-        Root<Clients> root = query.from(Clients.class);
-        query.select(root);
-        List<Clients> resultList = session.createQuery(query).getResultList();
-        return resultList;
-    }
     public void createUser(User newUser) {
         session = sessionFactory.openSession();
         session.beginTransaction();
@@ -354,7 +326,13 @@ public List<Long> getWorkoutsID(){
 
 
 
-
+    public List<Train> getBasketsByUserId(Long userId) {
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+        return session.createQuery("SELECT b FROM Train b WHERE b.user.id = :userId", Train.class)
+                .setParameter("userId", userId)
+                .getResultList();
+    }
 
 
 

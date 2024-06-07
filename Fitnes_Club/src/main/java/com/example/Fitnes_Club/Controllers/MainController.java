@@ -33,6 +33,7 @@ public class MainController {
     @GetMapping("/admin")
     public void admin() {
         log.info("Gracias Senior admin");
+
     }
 
     @GetMapping("get/coach/{id}")
@@ -51,20 +52,21 @@ public class MainController {
 
 
 
-    @GetMapping("get/clients/{id}")
-    public ResponseEntity getClientsById(@PathVariable("id") long id) {
-        return ResponseEntity.ok(dataAccessLayer.getClients(id));
-    }
-
-    @GetMapping("get/clients/")
-    public ResponseEntity getClients() {
-        return ResponseEntity.ok(dataAccessLayer.getClients());
-    }
-
     @GetMapping("get/users/")
     public ResponseEntity getUsers() {
         System.out.println("pop");
         return ResponseEntity.ok(dataAccessLayer.getUsers());
+    }
+
+
+    @GetMapping("/test-error")
+    public String testError() {
+        try {
+            throw new RuntimeException("This is a test exception");
+        } catch (Exception e) {
+            logger.error("An error occurred: ", e);
+            return "Error captured";
+        }
     }
 
 

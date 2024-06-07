@@ -12,7 +12,9 @@ public class Coach {
     private Long Id;
     @Column(name = "specialization")
     private String specialization;
-    @ManyToOne
-    @JoinColumn(name="user_id")
+    @Column(name = "name")
+    private String name;
+    @OneToOne
+    @JoinColumn(name  = "User_id")
     private User user;
 }

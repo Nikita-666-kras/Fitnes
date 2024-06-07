@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
@@ -52,22 +54,6 @@ public class AdminController {
     @PostMapping("update/workouts/{id}")
     public ResponseEntity updateWorkoutsById(@PathVariable("id") long id, @RequestBody Workouts updatedWorkouts) {
         dataAccessLayer.updateWorkouts(id, updatedWorkouts);
-        return ResponseEntity.ok("");
-    }
-
-    @PostMapping("create/clients/")
-    public ResponseEntity<String> createClients(@RequestBody Clients clients) {
-        dataAccessLayer.createClients(clients);
-        return ResponseEntity.ok("PABEDA!");
-    }
-    @DeleteMapping("delete/clients/{id}")
-    public ResponseEntity deleteClientsById(@PathVariable("id") long id) {
-        dataAccessLayer.deleteClients(id);
-        return ResponseEntity.ok("Cage номер " + id + " больше не Hru");
-    }
-    @PostMapping("update/clients/{id}")
-    public ResponseEntity updateClientsById(@PathVariable("id") long id, @RequestBody Clients updatedClients) {
-        dataAccessLayer.updateClients(id, updatedClients);
         return ResponseEntity.ok("");
     }
     @PostMapping("create/user/")
@@ -117,14 +103,26 @@ public class AdminController {
     public ResponseEntity getExercisesById(@PathVariable("id") long id) {
         return ResponseEntity.ok(dataAccessLayer.getExercises(id));
     }
+    @GetMapping("/train/workouts/{workoutsId}")
+    public List<Train> getTrainByWorkoutsId(@PathVariable Long workoutsId) {
+        return dataAccessLayer.getTrainByWorkoutsId(workoutsId);
+    }
+    @GetMapping("/get/train/{userId}")
 
+    public ResponseEntity<List<Train>> getBasketsByUserId(@PathVariable("userId") long userId) {
+        return ResponseEntity.ok(dataAccessLayer.getBasketsByUserId(userId));
+    }
 
     @PostMapping("create/exercises/")
     public ResponseEntity<String> createExercises(@RequestBody Exercises exercises) {
         dataAccessLayer.createExercise(exercises);
         return ResponseEntity.ok("PABEDA!");
     }
-
+    @PostMapping("create/train/")
+    public ResponseEntity<String> createTrain(@RequestBody Train train) {
+        dataAccessLayer.createTrain(train);
+        return ResponseEntity.ok("PABEDA!");
+    }
     @DeleteMapping("delete/exercises/{id}")
     public ResponseEntity deleteExercisesById(@PathVariable("id") long id) {
         dataAccessLayer.deleteExercises(id);
