@@ -1,55 +1,40 @@
 <template>
-  <div class="First container">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="c1 card">
-          <img
-            src="https://via.placeholder.com/150"
-            class="card-img-top"
-            alt="Товар 1"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Тренер</h5>
-            <p class="card-text">Описание Тренера 1.</p>
-            <a href="#" class="btn ">Профиль</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="c1 card">
-          <img
-            src="https://via.placeholder.com/150"
-            class="card-img-top"
-            alt="Товар 2"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Тренер 2</h5>
-            <p class="card-text">Описание Тренера 2.</p>
-            <a href="#" class="btn ">Профиль</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="c1 card">
-          <img
-            src="https://via.placeholder.com/150"
-            class="card-img-top"
-            alt="Товар 3"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Тренер 3</h5>
-            <p class="card-text">Описание Тренера 3.</p>
-            <a href="#" class="btn ">Профиль</a>
-          </div>
+  <div>
+    <h1>Список тренеров</h1>
+    <div class="card-container">
+      <div class="card" v-for="trainer in trainers" :key="trainer.id">
+        <img :src="trainer.avatar" alt="trainer-avatar" class="card-img-top" />
+        <div class="card-body">
+          <h5 class="card-title">{{ trainer.name }}</h5>
+          <p class="card-text">{{ trainer.bio }}</p>
+          <a :href="`/trainer/${trainer.id}`" class="btn btn-primary">Подробнее</a>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import api from '@/api.js';</script>
+<script>
+
+
+export default {
+  data() {
+    return {
+      trainers: [],
+    };
+  },
+  async created() {
+    try {
+      const response = await api.get('unauthorized/get/coach/'); // Предполагается, что эндпоинт /trainers возвращает список тренеров
+      this.trainers = response.data; // Предполагается, что список тренеров возвращается в формате массива объектов
+    } catch (error) {
+      console.error('Ошибка при получении списка тренеров:', error);
+    }
+  },
+};
+</script>
 
 <style scoped>
 .First {
