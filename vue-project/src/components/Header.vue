@@ -1,9 +1,19 @@
 <script>
+import MyWorkout from '@/page/MyWorkout.vue';
+
 export default {
   data() {
-    return {};
+    return {
+      searchQuery: '',
+    };
   },
   methods: {
+    performSearch() {
+      // Здесь можно добавить логику для выполнения поискового запроса
+      // Например, можно использовать маршрут или метод для выполнения поиска
+      // В этом примере, предположим, что есть маршрут "/search", который отображает результаты поиска
+      this.$router.push({ path: '/search', query: { q: this.searchQuery } });
+    },
     mainMenu() {
       window.location.href = '/auth/main';
     },
@@ -12,6 +22,9 @@ export default {
     },
     workout(){
       window.location.href = '/auth/workout';
+    },
+    MyWorkout(){
+      window.location.href = '/auth/MyWorcout'
     }
   },
 };
@@ -39,6 +52,7 @@ export default {
     
 
     </div> -->
+    
 
     <div class="logo">
       <img
@@ -49,12 +63,13 @@ export default {
       />
     </div>
     <div class="search-bar">
-      <input type="text" placeholder="Поиск..." />
-      <button type="submit">Найти</button>
+      <input type="text" placeholder="Поиск..." v-model="searchQuery" @keyup.enter="performSearch" />
+      <button @click="performSearch">Найти</button>
     </div>
     <div class="buttons">
       <button @click="mainMenu()">Главная</button>
       <button @click="workout()">Тренеровки</button>
+      <button @click="MyWorkout()">Мои Тренеровки</button>
       <button @click="account()">Мой профиль</button>
     </div>
   </header>
