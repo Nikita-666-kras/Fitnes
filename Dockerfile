@@ -9,13 +9,16 @@ RUN apt-get update && \
     apt-get install -y openjdk-21-jdk \
                        python3.8 \
                        python3-pip \
-                       nodejs \
-                       npm \
                        curl \
                        wget \
                        supervisor && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Установка Node.js и npm из официального источника
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get install -y nodejs
+
 # Создаем рабочие директории
 WORKDIR /app
 
@@ -38,7 +41,7 @@ RUN cd /app/node && npm run build
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Открываем порты
-EXPOSE 8080 5000 80
+EXPOSE 8080 5000 3333
 
 # Запускаем supervisord для управления процессами
 CMD ["/usr/bin/supervisord"]

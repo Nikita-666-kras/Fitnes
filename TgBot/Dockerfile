@@ -17,4 +17,4 @@ COPY . .
 ENV JAVA_OPTS=""
 
 # Указываем команду для запуска бота
-CMD ["python", "your_bot_script.py"]
+CMD ["python", "tgbot.py"]
