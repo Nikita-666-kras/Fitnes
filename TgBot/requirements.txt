@@ -1,0 +1,4 @@
+psycopg2-binary
+pyTelegramBotAPI
+pymorphy2
+requests
